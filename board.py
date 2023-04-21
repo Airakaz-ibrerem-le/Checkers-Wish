@@ -144,3 +144,17 @@ class Board:
         for checker in self.board:
             if checker.col == col and checker.row == row:
                 return checker
+    
+    def __repr__(self) -> str:
+        board = [[' ' for _ in range(COLS)] for _ in range(ROWS)]
+        for checker in self.board:
+            if checker.team == Team.BLUE:
+                board[checker.row][checker.col] = 'b'
+            else:
+                board[checker.row][checker.col] = 'r'
+        
+        res = f"Board: turn={self.current_team}:\n" + "-" * COLS * 4 + "\n"
+        for row in board:
+            res += (" | ".join(row)) + "\n"
+            res += "-" * COLS * 4 + "\n"
+        return res
