@@ -18,17 +18,17 @@ class Graph:
         return graph
     
     def __repr__(self) -> str:
-        self.dotgraph = "graph minmax \{\n"
+        self.dotgraph = "graph minmax {\n"
         self.__id = 0
         def dfs(graph: 'Graph', parent: str):
             id = f"C_{self.__id}"
             self.dotgraph += f"\t{id} [label={graph.value}];\n"
-            self.dotgraph += f"\t{parent} -- {id};"
+            self.dotgraph += f"\t{parent} -- {id};\n"
             self.__id += 1
             for c in graph.children:
                 dfs(c, id)
         
-        self.dotgraph += f"\troot [label={self.value}];"
+        self.dotgraph += f"\troot [label={self.value}];\n"
         for child in self.children:
             dfs(child, "root")
         return self.dotgraph +"\n}"

@@ -62,7 +62,7 @@ class AI:
         move, score = max(decision, key= lambda x: x[1])
         self.graph.value = score
         f = open("graph.dot", "w")
-        f.write(self.graph)
+        f.write(f"{self.graph}")
         
         print(f"Best Move is:\n{move}")
         return self.board.get_piece(move.prev_row, move.prev_col), move
