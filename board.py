@@ -145,7 +145,7 @@ class Board:
             if checker.col == col and checker.row == row:
                 return checker
     
-    def __repr__(self) -> str:
+    """def __repr__(self) -> str:
         board = [[' ' for _ in range(COLS)] for _ in range(ROWS)]
         for checker in self.board:
             if checker.team == Team.BLUE:
@@ -157,4 +157,4 @@ class Board:
         for row in board:
             res += (" | ".join(row)) + "\n"
             res += "-" * COLS * 4 + "\n"
-        return res
+        return res"""

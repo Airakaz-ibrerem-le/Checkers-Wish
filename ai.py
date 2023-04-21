@@ -20,7 +20,7 @@ class AI:
 
             checker = self.board.get_piece(move.prev_row, move.prev_col)
             self.board.move_checker(checker, move)
-            moves = self.board.get_all_legit_move(checker.team)
+            moves = self.board.get_all_legit_move(self.board.current_team)
             if len(moves) == 0 or depth == self.max_depth:
                 graph.value = self.board.heuristic_function()
                 self.memo[board_state] = graph.value
@@ -49,15 +49,20 @@ class AI:
         self.memo = {}
         self.graph = Graph(0, State.MAX)
         moves = self.board.get_all_legit_move(Team.BLUE)
+        print("Initial Moves:")
+        for mmm in moves:
+            print(mmm)
         decision : list[tuple[Move, int]] = []
 
         # Evaluating initial options
         for _move in moves:
-            m, score = dfs(self.graph.addChildren(), _move)
-            decision.append((m, score))
+            _, score = dfs(self.graph.addChildren(), _move)
+            decision.append((_move, score))
 
         move, score = max(decision, key= lambda x: x[1])
         self.graph.value = score
         f = open("graph.dot", "w")
         f.write(self.graph)
+        
+        print(f"Best Move is:\n{move}")
         return self.board.get_piece(move.prev_row, move.prev_col), move
