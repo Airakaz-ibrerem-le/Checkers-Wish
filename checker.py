@@ -95,25 +95,24 @@ class Queen(Checker):
         collision2 = board.get_piece(self.row - 1, self.col - 1)
         collision3 = board.get_piece(self.row + 1, self.col + 1)
         collision4 = board.get_piece(self.row - 1, self.col + 1)
-
-        if collision1 == None:
-            moves.append(Move(self.row, self.col, self.row + 1, self.col - 1, board.current_team, state = True))
-        elif board.get_piece(self.row + 2, self.col - 2) == None and board.is_in_board(self.row + 2, self.col - 2) and self.team != collision1.team: # We have to check if we can eat that piece
-            moves.append(Move(self.row, self.col,self.row + 2, self.col - 2, board.current_team, [collision1], True))
-
-        if collision2 == None:
-            moves.append(Move(self.row, self.col,self.row - 1, self.col - 1, board.current_team, state = True))
-        elif board.get_piece(self.row - 2, self.col - 2) == None and board.is_in_board(self.row - 2, self.col - 2) and self.team != collision2.team: # We have to check if we can eat that piece
-            moves.append(Move(self.row, self.col,self.row - 2, self.col - 2, board.current_team, [collision2], True))    
-
-        if collision3 == None:
-            moves.append(Move(self.row, self.col,self.row + 1, self.col + 1, board.current_team, state = True))
-        elif board.get_piece(self.row + 2, self.col + 2) == None and board.is_in_board(self.row + 2, self.col + 2) and self.team != collision3.team: # We have to check if we can eat that piece
-            moves.append(Move(self.row, self.col,self.row + 2, self.col + 2, board.current_team, [collision3], True))
-            
-        if collision4 == None:
-            moves.append(Move(self.row, self.col,self.row - 1, self.col + 1, board.current_team, state = True))
-        elif board.get_piece(self.row - 2, self.col + 2) == None and board.is_in_board(self.row - 2, self.col + 2) and self.team != collision4.team: # We have to check if we can eat that piece
-            moves.append(Move(self.row, self.col,self.row - 2, self.col + 2, board.current_team, [collision4], True))                 
+        if board.is_in_board(self.row + 1, self.col - 1):
+            if collision1 == None:
+                moves.append(Move(self.row, self.col, self.row + 1, self.col - 1, board.current_team, state = True))
+            elif board.get_piece(self.row + 2, self.col - 2) == None and board.is_in_board(self.row + 2, self.col - 2) and self.team != collision1.team: # We have to check if we can eat that piece
+                moves.append(Move(self.row, self.col,self.row + 2, self.col - 2, board.current_team, [collision1], True))
+        if board.is_in_board(self.row - 1, self.col - 1):
+            if collision2 == None:
+                moves.append(Move(self.row, self.col, self.row - 1, self.col - 1, board.current_team, state = True))
+            elif board.get_piece(self.row - 2, self.col - 2) == None and board.is_in_board(self.row - 2, self.col - 2) and self.team != collision2.team: # We have to check if we can eat that piece
+                moves.append(Move(self.row, self.col,self.row - 2, self.col - 2, board.current_team, [collision2], True))    
+        if board.is_in_board(self.row + 1, self.col + 1):
+            if collision3 == None:
+                moves.append(Move(self.row, self.col,self.row + 1, self.col + 1, board.current_team, state = True))
+            elif board.get_piece(self.row + 2, self.col + 2) == None and board.is_in_board(self.row + 2, self.col + 2) and self.team != collision3.team: # We have to check if we can eat that piece
+                moves.append(Move(self.row, self.col,self.row + 2, self.col + 2, board.current_team, [collision3], True))
+        if board.is_in_board(self.row - 1, self.col + 1):
+            if collision4 == None:
+                moves.append(Move(self.row, self.col,self.row - 1, self.col + 1, board.current_team, state = True))
+            elif board.get_piece(self.row - 2, self.col + 2) == None and board.is_in_board(self.row - 2, self.col + 2) and self.team != collision4.team: # We have to check if we can eat that piece
+                moves.append(Move(self.row, self.col,self.row - 2, self.col + 2, board.current_team, [collision4], True))                 
         return moves
-    
